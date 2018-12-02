@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Nodinite.Serilog.ApiSink.models
+namespace Nodinite.Serilog.Models
 {
     public class NodiniteLogEventSettings
     {

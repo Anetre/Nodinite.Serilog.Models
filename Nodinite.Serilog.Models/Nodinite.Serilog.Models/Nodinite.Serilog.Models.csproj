@@ -10,6 +10,8 @@
     <Company>Nodinite (https://nodinite.com/)</Company>
     <Authors>Nodinite</Authors>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
+    <Description>Nodinite Models that Serilog Sinks for Nodinite use.</Description>
   </PropertyGroup>
 
   <ItemGroup>
