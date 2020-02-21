@@ -38,7 +38,7 @@ namespace Nodinite.Serilog.Models
             foreach (var property in logEvent.Properties)
             {
                 var propertyKey = property.Key.ToLower();
-                var propertyValue = property.Value.ToString().Replace("\"", "");
+                var propertyValue = property.Value.ToString().Replace("\\", "").Trim('"');
 
                 if (propertyKey == "body")
                 {
