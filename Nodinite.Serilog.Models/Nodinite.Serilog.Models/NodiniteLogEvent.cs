@@ -30,6 +30,7 @@ namespace Nodinite.Serilog.Models
             EventNumber = 0;
             ApplicationInterchangeId = Guid.NewGuid().ToString();
             LocalInterchangeId = Guid.NewGuid();
+            ServiceInstanceActivityId = Guid.NewGuid()
             
             // optional fields
             ProcessName = settings.ProcessName;
