@@ -26,8 +26,6 @@ namespace Nodinite.Serilog.Models
             EndPointDirection = settings.EndPointDirection.HasValue ? settings.EndPointDirection.Value : 0;
             EndPointTypeId = settings.EndPointTypeId.HasValue ? settings.EndPointTypeId.Value : 0;
             LogDateTime = DateTimeOffset.UtcNow;
-            SequenceNo = 0;
-            EventNumber = 0;
             ApplicationInterchangeId = Guid.NewGuid().ToString();
             LocalInterchangeId = Guid.NewGuid();
             ServiceInstanceActivityId = Guid.NewGuid();
@@ -42,10 +40,36 @@ namespace Nodinite.Serilog.Models
             Context = new System.Collections.Generic.Dictionary<string, string>();
             foreach (var property in logEvent.Properties)
             {
-                if (property.Key.ToLower() == "body")
+                var propertyKey = property.Key.ToLower();
+
+                if (propertyKey == "body")
                 {
                     var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(property.Value.ToString());
                     Body = System.Convert.ToBase64String(plainTextBytes);
+                }
+                else if (propertyKey == "eventnumber")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyKey, out i))
+                    {
+                        EventNumber = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                    }
+                }
+                else if (propertyKey == "sequenceno")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyKey, out i))
+                    {
+                        SequenceNo = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                    }
                 }
                 else
                 {
