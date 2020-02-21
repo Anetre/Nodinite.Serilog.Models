@@ -6,13 +6,14 @@
     <PackageProjectUrl>https://github.com/Nodinite/Nodinite.Serilog.Models</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Nodinite/Nodinite.Serilog.Models</RepositoryUrl>
     <PackageIconUrl>https://github.com/Nodinite/Nodinite.Serilog.Models/blob/master/artifacts/nodinite-favicon-192x192.png?raw=true</PackageIconUrl>
-    <Copyright>2018 Nodinite - nodinite.com</Copyright>
+    <Copyright>2020 Nodinite - nodinite.com</Copyright>
     <Company>Nodinite (https://nodinite.com/)</Company>
     <Authors>Nodinite</Authors>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Description>Nodinite Models that Serilog Sinks for Nodinite use.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>Improved how ForContext maps to Nodinite specific properties.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
