@@ -47,6 +47,11 @@ namespace Nodinite.Serilog.Models
                     var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(property.Value.ToString());
                     Body = System.Convert.ToBase64String(plainTextBytes);
                 }
+                else if (propertyKey == "messagetype" 
+                    || propertyKey == "originalmessagetype")
+                {
+                    OriginalMessageTypeName = property.Value.ToString().Replace("\"", "");
+                }
                 else if (propertyKey == "eventnumber")
                 {
                     int i = 0;
