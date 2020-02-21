@@ -19,19 +19,21 @@ namespace Nodinite.Serilog.Models
 
         public NodiniteLogEvent(string message, LogEvent logEvent, NodiniteLogEventSettings settings)
         {
+            // mandatory
             LogAgentValueId = settings.LogAgentValueId.Value;
             EndPointName = settings.EndPointName;
             EndPointUri = settings.EndPointUri;
             EndPointDirection = settings.EndPointDirection.HasValue ? settings.EndPointDirection.Value : 0;
             EndPointTypeId = settings.EndPointTypeId.HasValue ? settings.EndPointTypeId.Value : 0;
-            OriginalMessageTypeName = string.IsNullOrWhiteSpace(settings.OriginalMessageTypeName) ? "Nodinite.Serilog.LogEvent" : settings.OriginalMessageTypeName;
             LogDateTime = DateTimeOffset.UtcNow;
-            ProcessingUser = settings.ProcessingUser;
             SequenceNo = 0;
             EventNumber = 0;
             ApplicationInterchangeId = Guid.NewGuid().ToString();
             LocalInterchangeId = Guid.NewGuid();
+            
+            // optional fields
             ProcessName = settings.ProcessName;
+            ProcessingUser = settings.ProcessingUser;
             ProcessingMachineName = settings.ProcessingMachineName;
             ProcessingModuleName = settings.ProcessingModuleName;
             ProcessingModuleType = settings.ProcessingModuleType;
