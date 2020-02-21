@@ -38,60 +38,61 @@ namespace Nodinite.Serilog.Models
             foreach (var property in logEvent.Properties)
             {
                 var propertyKey = property.Key.ToLower();
+                var propertyValue = property.Value.ToString().Replace("\"", "");
 
                 if (propertyKey == "body")
                 {
-                    var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(property.Value.ToString());
+                    var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(propertyValue);
                     Body = System.Convert.ToBase64String(plainTextBytes);
                 }
                 else if (propertyKey == "applicationinterchangeid")
-                {
-                    ApplicationInterchangeId = property.Value.ToString().Replace("\"", "");
+                {       
+                    ApplicationInterchangeId = propertyValue;
                 }
                 else if (propertyKey == "messagetype" 
                     || propertyKey == "originalmessagetype")
                 {
-                    OriginalMessageTypeName = property.Value.ToString().Replace("\"", "");
+                    OriginalMessageTypeName = propertyValue;
                 }
                 else if (propertyKey == "processingtime")
                 {
                     int i = 0;
-                    if (int.TryParse(propertyKey, out i))
+                    if (int.TryParse(propertyValue, out i))
                     {
                         ProcessingTime = i;
                     }
                     else
                     {
-                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                        Context.Add(property.Key, propertyValue);
                     }
                 }
                 else if (propertyKey == "eventnumber")
                 {
                     int i = 0;
-                    if (int.TryParse(propertyKey, out i))
+                    if (int.TryParse(propertyValue, out i))
                     {
                         EventNumber = i;
                     }
                     else
                     {
-                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                        Context.Add(property.Key, propertyValue);
                     }
                 }
                 else if (propertyKey == "sequenceno")
                 {
                     int i = 0;
-                    if (int.TryParse(propertyKey, out i))
+                    if (int.TryParse(propertyValue, out i))
                     {
                         SequenceNo = i;
                     }
                     else
                     {
-                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                        Context.Add(property.Key, propertyValue);
                     }
                 }
                 else
                 {
-                    Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                    Context.Add(property.Key, propertyValue);
                 }
             }
 

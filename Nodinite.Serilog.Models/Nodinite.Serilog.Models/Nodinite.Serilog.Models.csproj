@@ -10,10 +10,12 @@
     <Company>Nodinite (https://nodinite.com/)</Company>
     <Authors>Nodinite</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Description>Nodinite Models that Serilog Sinks for Nodinite use.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>Improved how ForContext maps to Nodinite specific properties.</PackageReleaseNotes>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
