@@ -26,7 +26,6 @@ namespace Nodinite.Serilog.Models
             EndPointDirection = settings.EndPointDirection.HasValue ? settings.EndPointDirection.Value : 0;
             EndPointTypeId = settings.EndPointTypeId.HasValue ? settings.EndPointTypeId.Value : 0;
             LogDateTime = DateTimeOffset.UtcNow;
-            ApplicationInterchangeId = Guid.NewGuid().ToString();
             LocalInterchangeId = Guid.NewGuid();
             ServiceInstanceActivityId = Guid.NewGuid();
             
@@ -47,10 +46,26 @@ namespace Nodinite.Serilog.Models
                     var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(property.Value.ToString());
                     Body = System.Convert.ToBase64String(plainTextBytes);
                 }
+                else if (propertyKey == "applicationinterchangeid")
+                {
+                    ApplicationInterchangeId = property.Value.ToString().Replace("\"", "");
+                }
                 else if (propertyKey == "messagetype" 
                     || propertyKey == "originalmessagetype")
                 {
                     OriginalMessageTypeName = property.Value.ToString().Replace("\"", "");
+                }
+                else if (propertyKey == "processingtime")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyKey, out i))
+                    {
+                        ProcessingTime = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                    }
                 }
                 else if (propertyKey == "eventnumber")
                 {
@@ -81,8 +96,7 @@ namespace Nodinite.Serilog.Models
                     Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
                 }
             }
-
-            ProcessingTime = 0;
+            
             LogText = message;
 
             switch (logEvent.Level)
