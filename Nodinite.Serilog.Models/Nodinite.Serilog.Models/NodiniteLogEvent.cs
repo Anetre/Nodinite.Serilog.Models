@@ -30,7 +30,7 @@ namespace Nodinite.Serilog.Models
             EventNumber = 0;
             ApplicationInterchangeId = Guid.NewGuid().ToString();
             LocalInterchangeId = Guid.NewGuid();
-            ServiceInstanceActivityId = Guid.NewGuid()
+            ServiceInstanceActivityId = Guid.NewGuid();
             
             // optional fields
             ProcessName = settings.ProcessName;
@@ -42,7 +42,15 @@ namespace Nodinite.Serilog.Models
             Context = new System.Collections.Generic.Dictionary<string, string>();
             foreach (var property in logEvent.Properties)
             {
-                Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                if (property.Key.ToLower() == "body")
+                {
+                    var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(property.Value.ToString());
+                    Body = System.Convert.ToBase64String(plainTextBytes);
+                }
+                else
+                {
+                    Context.Add(property.Key, property.Value.ToString().Replace("\"", ""));
+                }
             }
 
             ProcessingTime = 0;
