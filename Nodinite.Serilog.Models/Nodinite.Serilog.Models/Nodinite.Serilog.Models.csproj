@@ -9,7 +9,7 @@
     <Copyright>2020 Nodinite - nodinite.com</Copyright>
     <Company>Nodinite (https://nodinite.com/)</Company>
     <Authors>Nodinite</Authors>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.1.0</Version>
     <Description>Nodinite Models that Serilog Sinks for Nodinite use.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
