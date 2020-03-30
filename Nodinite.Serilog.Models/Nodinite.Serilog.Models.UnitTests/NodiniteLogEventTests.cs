@@ -68,6 +68,19 @@ namespace Nodinite.Serilog.Models.UnitTests
         }
 
         [TestMethod]
+        public void Set_EventDirection_Ok()
+        {
+            MessageTemplate messageTemplate = MessageTemplate.Empty;
+            var serilogLogEvent = new LogEvent(DateTimeOffset.UtcNow, LogEventLevel.Information, null, messageTemplate, new List<LogEventProperty>());
+
+            serilogLogEvent.AddOrUpdateProperty(new LogEventProperty("eventdirection", new ScalarValue("0")));
+
+            NodiniteLogEvent nle = new NodiniteLogEvent("Hello world", serilogLogEvent, _settings);
+
+            Assert.AreEqual(0, nle.EventDirection);
+        }
+
+        [TestMethod]
         public void Set_StatusCode_Error()
         {
             MessageTemplate messageTemplate = MessageTemplate.Empty;
