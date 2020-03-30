@@ -45,14 +45,60 @@ namespace Nodinite.Serilog.Models
                     var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(propertyValue);
                     Body = System.Convert.ToBase64String(plainTextBytes);
                 }
-                else if (propertyKey == "applicationinterchangeid")
+                else if (propertyKey == "applicationinterchangeid"
+                    || propertyKey == "correlationid")
                 {       
                     ApplicationInterchangeId = propertyValue;
                 }
                 else if (propertyKey == "messagetype" 
-                    || propertyKey == "originalmessagetype")
+                    || propertyKey == "originalmessagetype"
+                    || propertyKey == "originalmessagetypename")
                 {
                     OriginalMessageTypeName = propertyValue;
+                }
+                else if (propertyKey == "endpointname")
+                {
+                    EndPointName = propertyValue;
+                }
+                else if (propertyKey == "endpointuri")
+                {
+                    EndPointUri = propertyValue;
+                }
+                else if (propertyKey == "endpointdirection")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyValue, out i))
+                    {
+                        EndPointDirection = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, propertyValue);
+                    }
+                }
+                else if (propertyKey == "endpointtypeid")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyValue, out i))
+                    {
+                        EndPointTypeId = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, propertyValue);
+                    }
+                }
+                else if (propertyKey == "eventdirection")
+                {
+                    int i = 0;
+                    if (int.TryParse(propertyValue, out i))
+                    {
+                        EventDirection = i;
+                    }
+                    else
+                    {
+                        Context.Add(property.Key, propertyValue);
+                    }
                 }
                 else if (propertyKey == "processingtime")
                 {
@@ -133,6 +179,7 @@ namespace Nodinite.Serilog.Models
         public string ProcessingUser { get; set; }
         public int SequenceNo { get; set; }
         public int EventNumber { get; set; }
+        public int EventDirection { get; set; }
         public string LogText { get; set; }
         public string ApplicationInterchangeId { get; set; }
         public Guid LocalInterchangeId { get; set; }
